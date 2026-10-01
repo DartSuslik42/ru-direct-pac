@@ -52,7 +52,7 @@ jobs:
           test -s domains.txt
           test -s upstream.json
 
-          if grep -Eq 'dnsResolve\\(|isInNet\\(' proxy.pac; then
+          if grep -Fq 'dnsResolve(' proxy.pac || grep -Fq 'isInNet(' proxy.pac; then
             echo "Heavy PAC primitives detected"
             exit 1
           fi
@@ -73,4 +73,7 @@ jobs:
 
           git add proxy.pac domains.txt upstream.json
           git commit -m "chore: sync latest ru-direct release"
+
+          # Rebase if another commit landed while this workflow was running.
+          git pull --rebase origin main
           git push
