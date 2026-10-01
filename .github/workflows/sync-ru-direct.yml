@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - build_pac.py
+      - custom-direct-domains.txt
       - .github/workflows/sync-ru-direct.yml
 
   # External hook target. A sender can POST repository_dispatch with
