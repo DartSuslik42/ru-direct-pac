@@ -57,7 +57,7 @@ jobs:
             exit 1
           fi
 
-          grep -q 'SOCKS5 127.0.0.1:1080' proxy.pac
+          grep -q 'SOCKS5 127.0.0.1:3128' proxy.pac
           grep -q 'DIRECT' proxy.pac
 
       - name: Commit fresh data
