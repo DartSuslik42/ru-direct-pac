@@ -10,7 +10,7 @@
   "asset_digest": "sha256:0ecccc477242a9fad082ea1f3660e0fcb2c2d407115276a1c2eb4f9b0e90877b",
   "source_url": "https://github.com/kyoresuas/ru-direct/releases/download/latest/ru-lite.domains.txt",
   "upstream_domain_count": 464,
-  "custom_domain_count": 4,
-  "domain_count": 468,
-  "pac_sha256": "37da33a9ffcb4bf0ab91c4124760b4b222cb22b363ec45c78927057d283e6db9"
+  "custom_domain_count": 5,
+  "domain_count": 469,
+  "pac_sha256": "5e9d3b35a88bde5fb0b89de95a9a642ec708f3a5ff2adc9b7ed80ce583389321"
 }
