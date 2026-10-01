@@ -13,7 +13,7 @@ from pathlib import Path
 UPSTREAM_REPO = "kyoresuas/ru-direct"
 LATEST_RELEASE_API = f"https://api.github.com/repos/{UPSTREAM_REPO}/releases/latest"
 DEFAULT_ASSET = "ru-lite.domains.txt"
-DEFAULT_PROXY = "SOCKS5 127.0.0.1:3128"
+DEFAULT_PROXY = "SOCKS5 127.0.0.1:1080"
 DEFAULT_CUSTOM_DOMAINS = "custom-direct-domains.txt"
 
 DOMAIN_RE = re.compile(
