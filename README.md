@@ -39,3 +39,25 @@ python build_pac.py
 ```
 
 Для более широкого набора можно переключиться с `ru-lite.domains.txt` на `ru-standard.domains.txt`.
+
+
+## Локальные исключения
+
+Дополнительные домены, которых нет или которые нужно принудительно держать в DIRECT, хранятся в:
+
+```text
+custom-direct-domains.txt
+```
+
+Сейчас добавлены:
+
+```text
+xn--80adxhks.komissionki.ru   # москва.komissionki.ru
+avito.ru
+mipt.ru                       # также покрывает frtk.mipt.ru
+50.xn--b1aew.xn--p1ai        # 50.мвд.рф
+```
+
+Корневой домен автоматически покрывает поддомены, поэтому `mipt.ru` включает `frtk.mipt.ru`.
+
+Изменение `custom-direct-domains.txt` автоматически запускает пересборку PAC через GitHub Actions.
