@@ -14,6 +14,7 @@ UPSTREAM_REPO = "kyoresuas/ru-direct"
 LATEST_RELEASE_API = f"https://api.github.com/repos/{UPSTREAM_REPO}/releases/latest"
 DEFAULT_ASSET = "ru-lite.domains.txt"
 DEFAULT_PROXY = "SOCKS5 127.0.0.1:1080"
+DEFAULT_CUSTOM_DOMAINS = "custom-direct-domains.txt"
 
 DOMAIN_RE = re.compile(
     r"^(?=.{1,253}\.?$)"
@@ -159,19 +160,29 @@ def main() -> None:
     parser.add_argument("--output", default="proxy.pac")
     parser.add_argument("--domains-output", default="domains.txt")
     parser.add_argument("--metadata-output", default="upstream.json")
+    parser.add_argument("--custom-domains", default=DEFAULT_CUSTOM_DOMAINS)
     args = parser.parse_args()
 
     release, asset = latest_asset(args.asset)
     source_url = asset["browser_download_url"]
     raw = request_text(source_url)
 
-    domains = sorted(
-        {
+    upstream_domains = {
+        domain
+        for line in raw.splitlines()
+        if (domain := normalize_domain(line)) is not None
+    }
+
+    custom_domains = set()
+    custom_path = Path(args.custom_domains)
+    if custom_path.exists():
+        custom_domains = {
             domain
-            for line in raw.splitlines()
+            for line in custom_path.read_text(encoding="utf-8").splitlines()
             if (domain := normalize_domain(line)) is not None
         }
-    )
+
+    domains = sorted(upstream_domains | custom_domains)
 
     if not domains:
         raise RuntimeError("No valid domains found; refusing to overwrite PAC")
@@ -192,6 +203,8 @@ def main() -> None:
         "asset_size": asset.get("size"),
         "asset_digest": asset.get("digest"),
         "source_url": source_url,
+        "upstream_domain_count": len(upstream_domains),
+        "custom_domain_count": len(custom_domains),
         "domain_count": len(domains),
         "pac_sha256": hashlib.sha256(pac.encode("utf-8")).hexdigest(),
     }
@@ -202,6 +215,7 @@ def main() -> None:
 
     print(
         f"Generated {args.output}: {len(domains)} direct domains "
+        f"({len(upstream_domains)} upstream + {len(custom_domains)} custom) "
         f"from {release.get('name') or release.get('tag_name')}"
     )
 
