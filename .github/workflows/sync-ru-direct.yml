@@ -1,0 +1,75 @@
+name: Sync ru-direct release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - build_pac.py
+      - .github/workflows/sync-ru-direct.yml
+
+  # External hook target. A sender can POST repository_dispatch with
+  # event_type=ru-direct-release immediately after an upstream release.
+  repository_dispatch:
+    types:
+      - ru-direct-release
+
+  workflow_dispatch:
+
+  # Fallback because GitHub cannot subscribe directly to release events
+  # from another repository.
+  schedule:
+    - cron: "23 */6 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-ru-direct
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build PAC from latest ru-direct release
+        run: python build_pac.py --asset ru-lite.domains.txt
+
+      - name: Validate generated PAC
+        shell: bash
+        run: |
+          test -s proxy.pac
+          test -s domains.txt
+          test -s upstream.json
+
+          if grep -Eq 'dnsResolve\\(|isInNet\\(' proxy.pac; then
+            echo "Heavy PAC primitives detected"
+            exit 1
+          fi
+
+          grep -q 'SOCKS5 127.0.0.1:1080' proxy.pac
+          grep -q 'DIRECT' proxy.pac
+
+      - name: Commit fresh data
+        shell: bash
+        run: |
+          if git diff --quiet -- proxy.pac domains.txt upstream.json; then
+            echo "Already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add proxy.pac domains.txt upstream.json
+          git commit -m "chore: sync latest ru-direct release"
+          git push
