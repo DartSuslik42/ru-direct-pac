@@ -1,4 +1,5 @@
 3dsec.sberbank.ru
+50.xn--b1aew.xn--p1ai
 532121.ms.dzen.ru
 542121.ms.dzen.ru
 552121.ms.dzen.ru
@@ -45,6 +46,7 @@ auth.mail.ru
 auth.online.gpb.ru
 auto.gosuslugi.ru
 avatars.dzeninfra.ru
+avito.ru
 bankiros.ru
 bcs-bank.ru
 bot.gosuslugi.ru
@@ -190,6 +192,7 @@ mid.ru
 minfin.gov.ru
 mintrans.gov.ru
 minzdrav.gov.ru
+mipt.ru
 mkb.ru
 mob.cdn.gpb.ru
 mobile-bank.cdn-tinkoff.ru
@@ -450,6 +453,7 @@ www.vtb.ru
 www.yookassa.ru
 www.yoomoney.ru
 www2.gosuslugi.ru
+xn--80adxhks.komissionki.ru
 xn--80aesfpebagmfblc0a.xn--p1ai
 xn--80ajghhoc2aj1c8b.xn--p1ai
 xn--90adear.xn--p1ai

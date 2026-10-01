@@ -2,13 +2,15 @@
   "upstream_repository": "kyoresuas/ru-direct",
   "release_id": 396831095,
   "release_tag": "latest",
-  "release_name": "Списки от 2026-09-30",
-  "release_updated_at": "2026-09-30T09:14:29Z",
-  "asset_id": 600502317,
+  "release_name": "Списки от 2026-10-01",
+  "release_updated_at": "2026-10-01T09:42:18Z",
+  "asset_id": 602917323,
   "asset_name": "ru-lite.domains.txt",
   "asset_size": 7318,
   "asset_digest": "sha256:0ecccc477242a9fad082ea1f3660e0fcb2c2d407115276a1c2eb4f9b0e90877b",
   "source_url": "https://github.com/kyoresuas/ru-direct/releases/download/latest/ru-lite.domains.txt",
-  "domain_count": 464,
-  "pac_sha256": "1bd56280640b4a794efe81874ef39049aa626c7b28a75cb87328ce87e5153d3b"
+  "upstream_domain_count": 464,
+  "custom_domain_count": 4,
+  "domain_count": 468,
+  "pac_sha256": "37da33a9ffcb4bf0ab91c4124760b4b222cb22b363ec45c78927057d283e6db9"
 }
