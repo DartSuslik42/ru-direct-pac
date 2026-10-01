@@ -7,7 +7,7 @@
 ```text
 RU domains (ru-direct)  → DIRECT
 localhost / private LAN → DIRECT
-остальной трафик        → SOCKS5 127.0.0.1:1080
+остальной трафик        → SOCKS5 127.0.0.1:3128
 ```
 
 Источник доменов — [kyoresuas/ru-direct](https://github.com/kyoresuas/ru-direct), по умолчанию используется asset `ru-lite.domains.txt` из latest release.
